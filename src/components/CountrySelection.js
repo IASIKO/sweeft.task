@@ -1,15 +1,55 @@
-import { Autocomplete } from "@mui/material";
-import React from "react";
+import { Autocomplete, Box, TextField } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import CountryContent from "./CountryContent";
 
-const CountrySelection = () => {
+const CountrySelection = ({ countryCode }) => {
+  const [countries, setCountries] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState(null);
+
+  const fetchCountries = async () => {
+    const response = await fetch("https://restcountries.com/v3.1/all");
+
+    const data = await response.json();
+    setCountries(data);
+  };
+
+  useEffect(() => {
+    fetchCountries();
+  }, []);
+
+  const handleCountryChange = (newValue) => {
+    setSelectedCountry(newValue);
+  };
+
+
   return (
+    <Box>
       <Autocomplete
-        disablePortal
-        id="combo-box-demo"
-        options=""
-        sx={{ width: 300 }}
-        renderInput={() => {}}
+        id="country-select-demo"
+        sx={{ width: "100%" }}
+        options={countries}
+        autoHighlight
+        getOptionLabel={(option) => option.name.common}
+        renderOption={(props, option) => (
+          <Box component="li" {...props}>
+            {option.name.common}
+          </Box>
+        )}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="Choose a country"
+            inputProps={{
+              ...params.inputProps,
+              autoComplete: "new-password",
+            }}
+          />
+        )}
+        value={countries.find((c) => c.cca2 === countryCode) || null}
+        onChange={handleCountryChange}
       />
+      <CountryContent selectedCountry={selectedCountry} />
+    </Box>
   );
 };
 
