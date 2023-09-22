@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import CountrySelection from "../components/CountrySelection";
+import { Outlet } from "react-router-dom";
 
 const StyledBox = styled(Box)(() => ({
   maxWidth: "1200px",
@@ -37,6 +38,7 @@ const Main = () => {
   return (
     <StyledBox>
       <CountrySelection countryCode={countryCode} />
+      <Outlet/>
     </StyledBox>
   );
 };

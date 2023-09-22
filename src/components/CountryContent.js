@@ -15,16 +15,18 @@ const ContentBox = styled(Box)(() => ({
 }));
 
 const CountryContent = ({ selectedCountry }) => {
+
+    // console.log(selectedCountry);
     
   return (
     <ContentBox>
-      {/* {selectedCountry && (
+      {selectedCountry && (
         <>
           <div>Capital: {selectedCountry.capital}</div>
           <div>Currency: {selectedCountry.currency}</div>
           <div>Population: {selectedCountry.population}</div>
         </>
-      )} */}
+      )}
     </ContentBox>
   );
 };
