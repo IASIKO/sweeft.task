@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React from "react";
 import styled from "styled-components";
 
@@ -14,17 +14,37 @@ const ContentBox = styled(Box)(() => ({
   marginTop: "24px",
 }));
 
-const CountryContent = ({ selectedCountry }) => {
+const InfoBox = styled(Box)(() => ({
+  display: "flex",
+}));
 
-    // console.log(selectedCountry);
-    
+const CountryContent = ({ selectedCountry }) => {
+  console.log(selectedCountry);
+
   return (
     <ContentBox>
       {selectedCountry && (
         <>
-          <div>Capital: {selectedCountry.capital}</div>
-          <div>Currency: {selectedCountry.currency}</div>
-          <div>Population: {selectedCountry.population}</div>
+          <Typography variant="h4">
+            {selectedCountry.name.common}
+            <img
+              style={{
+                verticalAlign: "middle",
+                height: "30px",
+                marginLeft: "10px",
+              }}
+              src={selectedCountry.flags.svg}
+              alt={selectedCountry.flags.alt}
+            />
+          </Typography>
+          <InfoBox>
+            <div>Capital: {selectedCountry.capital}</div>
+            <div>
+              Currency: {selectedCountry.currencies.GEL.name} (
+              {selectedCountry.currencies.GEL.symbol})
+            </div>
+            <div>Population: {selectedCountry.population}</div>
+          </InfoBox>
         </>
       )}
     </ContentBox>

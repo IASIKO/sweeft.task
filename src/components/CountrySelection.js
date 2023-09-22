@@ -19,7 +19,7 @@ const CountrySelection = ({ countryCode }) => {
 
   useEffect(() => {
     setSelectedCountry(countries.find((c) => c.cca2 === countryCode));
-  }, [countryCode]);
+  }, [countryCode, countries]);
 
 
   return (
