@@ -3,7 +3,6 @@ import React from "react";
 import StyledBoxComponent from "../UI/StyledBoxComponent";
 
 const CountryContent = ({ selectedCountry }) => {
-
   return (
     <StyledBoxComponent>
       {selectedCountry && (
@@ -110,7 +109,7 @@ const CountryContent = ({ selectedCountry }) => {
                 </Grid>
                 <Grid item md={9}>
                   <Typography variant="body2">
-                    {selectedCountry.borders.join(", ")},
+                    {selectedCountry.borders.join(", ")}
                   </Typography>
                 </Grid>
               </Grid>
