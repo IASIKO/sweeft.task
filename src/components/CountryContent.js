@@ -1,24 +1,13 @@
 import { Box, Grid, Typography } from "@mui/material";
 import React from "react";
 import styled from "styled-components";
-
-const ContentBox = styled(Box)(() => ({
-  backgroundColor: " rgb(255, 255, 255)",
-  color: "rgba(0, 0, 0, 0.87)",
-  transition: "box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms",
-  borderRadius: "4px",
-  boxShadow:
-    "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
-  overflow: "hidden",
-  padding: "16px",
-  marginTop: "24px",
-}));
+import StyledBoxComponent from "../UI/StyledBoxComponent";
 
 const CountryContent = ({ selectedCountry }) => {
   console.log(selectedCountry);
 
   return (
-    <ContentBox>
+    <StyledBoxComponent>
       {selectedCountry && (
         <>
           <Typography variant="h4" mb={2}>
@@ -37,7 +26,9 @@ const CountryContent = ({ selectedCountry }) => {
             <Grid item xs={12} md={6}>
               <Grid container spacing={{ xs: 1 }}>
                 <Grid item md={3}>
-                  <Typography variant="body1" fontWeight={600}>Capital:</Typography>
+                  <Typography variant="body1" fontWeight={600}>
+                    Capital:
+                  </Typography>
                 </Grid>
                 <Grid item md={9}>
                   <Typography variant="body2">
@@ -50,7 +41,9 @@ const CountryContent = ({ selectedCountry }) => {
             <Grid item xs={12} md={6}>
               <Grid container spacing={{ xs: 1 }}>
                 <Grid item md={3}>
-                  <Typography variant="body1" fontWeight={600}>Continents:</Typography>
+                  <Typography variant="body1" fontWeight={600}>
+                    Continents:
+                  </Typography>
                 </Grid>
                 <Grid item md={9}>
                   <Typography variant="body2">
@@ -64,7 +57,9 @@ const CountryContent = ({ selectedCountry }) => {
             <Grid item xs={12} md={6}>
               <Grid container spacing={{ xs: 1 }}>
                 <Grid item md={3}>
-                  <Typography variant="body1" fontWeight={600}>Currency:</Typography>
+                  <Typography variant="body1" fontWeight={600}>
+                    Currency:
+                  </Typography>
                 </Grid>
                 <Grid item md={9}>
                   {Object.keys(selectedCountry.currencies).map((index) => (
@@ -80,7 +75,9 @@ const CountryContent = ({ selectedCountry }) => {
             <Grid item xs={12} md={6}>
               <Grid container spacing={{ xs: 1 }}>
                 <Grid item md={3}>
-                  <Typography variant="body1" fontWeight={600}>Population:</Typography>
+                  <Typography variant="body1" fontWeight={600}>
+                    Population:
+                  </Typography>
                 </Grid>
                 <Grid item md={9}>
                   <Typography variant="body2">
@@ -94,7 +91,9 @@ const CountryContent = ({ selectedCountry }) => {
             <Grid item xs={12} md={6}>
               <Grid container spacing={{ xs: 1 }}>
                 <Grid item md={3}>
-                  <Typography variant="body1" fontWeight={600}>Region:</Typography>
+                  <Typography variant="body1" fontWeight={600}>
+                    Region:
+                  </Typography>
                 </Grid>
                 <Grid item md={9}>
                   <Typography variant="body2">
@@ -107,7 +106,9 @@ const CountryContent = ({ selectedCountry }) => {
             <Grid item xs={12} md={6}>
               <Grid container spacing={{ xs: 1 }}>
                 <Grid item md={3}>
-                  <Typography variant="body1" fontWeight={600}>Borders:</Typography>
+                  <Typography variant="body1" fontWeight={600}>
+                    Borders:
+                  </Typography>
                 </Grid>
                 <Grid item md={9}>
                   <Typography variant="body2">
@@ -119,7 +120,7 @@ const CountryContent = ({ selectedCountry }) => {
           </Grid>
         </>
       )}
-    </ContentBox>
+    </StyledBoxComponent>
   );
 };
 

@@ -1,8 +1,9 @@
 import React from 'react'
+import StyledBoxComponent from '../UI/StyledBoxComponent'
 
 const Airports = () => {
   return (
-    <div>Airports</div>
+    <StyledBoxComponent>Airports</StyledBoxComponent>
   )
 }
 
