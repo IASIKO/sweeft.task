@@ -38,7 +38,6 @@ const CountrySelection = ({ countryCode }) => {
         renderInput={(params) => (
           <TextField
             {...params}
-            label="Choose a country"
             inputProps={{
               ...params.inputProps,
               autoComplete: "new-password",

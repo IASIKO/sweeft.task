@@ -21,7 +21,7 @@ const CountryContent = ({ selectedCountry }) => {
     <ContentBox>
       {selectedCountry && (
         <>
-          <Typography variant="h4">
+          <Typography variant="h4" mb={2}>
             {selectedCountry.name.common}
             <img
               style={{
@@ -33,7 +33,7 @@ const CountryContent = ({ selectedCountry }) => {
               alt={selectedCountry.flags.alt}
             />
           </Typography>
-          <Grid container spacing={{ xs: 1 }} >
+          <Grid container spacing={{ xs: 1 }}>
             <Grid item xs={12} md={6}>
               <Grid container spacing={{ xs: 1 }}>
                 <Grid item md={3}>
