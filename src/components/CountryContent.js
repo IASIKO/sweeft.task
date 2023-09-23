@@ -33,11 +33,11 @@ const CountryContent = ({ selectedCountry }) => {
               alt={selectedCountry.flags.alt}
             />
           </Typography>
-          <Grid container spacing={{ xs: 1 }}>
+          <Grid container spacing={{ xs: 1 }} >
             <Grid item xs={12} md={6}>
               <Grid container spacing={{ xs: 1 }}>
                 <Grid item md={3}>
-                  <Typography variant="body1">Capital:</Typography>
+                  <Typography variant="body1" fontWeight={600}>Capital:</Typography>
                 </Grid>
                 <Grid item md={9}>
                   <Typography variant="body2">
@@ -50,34 +50,7 @@ const CountryContent = ({ selectedCountry }) => {
             <Grid item xs={12} md={6}>
               <Grid container spacing={{ xs: 1 }}>
                 <Grid item md={3}>
-                  <Typography variant="body1">Currency:</Typography>
-                </Grid>
-                <Grid item md={9}>
-                  <Typography variant="body2">
-                    {selectedCountry.currencies.GEL.name} (
-                    {selectedCountry.currencies.GEL.symbol})
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Grid>
-
-            <Grid item xs={12} md={6}>
-              <Grid container spacing={{ xs: 1 }}>
-                <Grid item md={3}>
-                  <Typography variant="body1">Region:</Typography>
-                </Grid>
-                <Grid item md={9}>
-                  <Typography variant="body2">
-                    {selectedCountry.region}, {selectedCountry.subregion}
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Grid>
-
-            <Grid item xs={12} md={6}>
-              <Grid container spacing={{ xs: 1 }}>
-                <Grid item md={3}>
-                  <Typography variant="body1">Continents:</Typography>
+                  <Typography variant="body1" fontWeight={600}>Continents:</Typography>
                 </Grid>
                 <Grid item md={9}>
                   <Typography variant="body2">
@@ -91,7 +64,23 @@ const CountryContent = ({ selectedCountry }) => {
             <Grid item xs={12} md={6}>
               <Grid container spacing={{ xs: 1 }}>
                 <Grid item md={3}>
-                  <Typography variant="body1">Population:</Typography>
+                  <Typography variant="body1" fontWeight={600}>Currency:</Typography>
+                </Grid>
+                <Grid item md={9}>
+                  {Object.keys(selectedCountry.currencies).map((index) => (
+                    <Typography variant="body2" key={index}>
+                      {selectedCountry.currencies[index].name} (
+                      {selectedCountry.currencies[index].symbol})
+                    </Typography>
+                  ))}
+                </Grid>
+              </Grid>
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <Grid container spacing={{ xs: 1 }}>
+                <Grid item md={3}>
+                  <Typography variant="body1" fontWeight={600}>Population:</Typography>
                 </Grid>
                 <Grid item md={9}>
                   <Typography variant="body2">
@@ -105,12 +94,24 @@ const CountryContent = ({ selectedCountry }) => {
             <Grid item xs={12} md={6}>
               <Grid container spacing={{ xs: 1 }}>
                 <Grid item md={3}>
-                  <Typography variant="body1">Borders:</Typography>
+                  <Typography variant="body1" fontWeight={600}>Region:</Typography>
                 </Grid>
                 <Grid item md={9}>
                   <Typography variant="body2">
-                    {" "}
-                    {selectedCountry.borders}
+                    {selectedCountry.region}, {selectedCountry.subregion}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <Grid container spacing={{ xs: 1 }}>
+                <Grid item md={3}>
+                  <Typography variant="body1" fontWeight={600}>Borders:</Typography>
+                </Grid>
+                <Grid item md={9}>
+                  <Typography variant="body2">
+                    {selectedCountry.borders.join(", ")},
                   </Typography>
                 </Grid>
               </Grid>
