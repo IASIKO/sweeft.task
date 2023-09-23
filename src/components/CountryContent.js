@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import React from "react";
 import styled from "styled-components";
 
@@ -12,10 +12,6 @@ const ContentBox = styled(Box)(() => ({
   overflow: "hidden",
   padding: "16px",
   marginTop: "24px",
-}));
-
-const InfoBox = styled(Box)(() => ({
-  display: "flex",
 }));
 
 const CountryContent = ({ selectedCountry }) => {
@@ -37,14 +33,89 @@ const CountryContent = ({ selectedCountry }) => {
               alt={selectedCountry.flags.alt}
             />
           </Typography>
-          <InfoBox>
-            <div>Capital: {selectedCountry.capital}</div>
-            <div>
-              Currency: {selectedCountry.currencies.GEL.name} (
-              {selectedCountry.currencies.GEL.symbol})
-            </div>
-            <div>Population: {selectedCountry.population}</div>
-          </InfoBox>
+          <Grid container spacing={{ xs: 1 }}>
+            <Grid item xs={12} md={6}>
+              <Grid container spacing={{ xs: 1 }}>
+                <Grid item md={3}>
+                  <Typography variant="body1">Capital:</Typography>
+                </Grid>
+                <Grid item md={9}>
+                  <Typography variant="body2">
+                    {selectedCountry.capital}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <Grid container spacing={{ xs: 1 }}>
+                <Grid item md={3}>
+                  <Typography variant="body1">Currency:</Typography>
+                </Grid>
+                <Grid item md={9}>
+                  <Typography variant="body2">
+                    {selectedCountry.currencies.GEL.name} (
+                    {selectedCountry.currencies.GEL.symbol})
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <Grid container spacing={{ xs: 1 }}>
+                <Grid item md={3}>
+                  <Typography variant="body1">Region:</Typography>
+                </Grid>
+                <Grid item md={9}>
+                  <Typography variant="body2">
+                    {selectedCountry.region}, {selectedCountry.subregion}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <Grid container spacing={{ xs: 1 }}>
+                <Grid item md={3}>
+                  <Typography variant="body1">Continents:</Typography>
+                </Grid>
+                <Grid item md={9}>
+                  <Typography variant="body2">
+                    {" "}
+                    {selectedCountry.continents}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <Grid container spacing={{ xs: 1 }}>
+                <Grid item md={3}>
+                  <Typography variant="body1">Population:</Typography>
+                </Grid>
+                <Grid item md={9}>
+                  <Typography variant="body2">
+                    {" "}
+                    {selectedCountry.population}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+
+            <Grid item xs={12} md={6}>
+              <Grid container spacing={{ xs: 1 }}>
+                <Grid item md={3}>
+                  <Typography variant="body1">Borders:</Typography>
+                </Grid>
+                <Grid item md={9}>
+                  <Typography variant="body2">
+                    {" "}
+                    {selectedCountry.borders}
+                  </Typography>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
         </>
       )}
     </ContentBox>
