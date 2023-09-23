@@ -1,17 +1,11 @@
 import { Autocomplete, Box, TextField } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import CountryContent from "./CountryContent";
+import { Context } from "../store/ContextProvider";
 
 const CountrySelection = ({ countryCode }) => {
-  const [countries, setCountries] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState(null);
-
-  const fetchCountries = async () => {
-    const response = await fetch("https://restcountries.com/v3.1/all");
-
-    const data = await response.json();
-    setCountries(data);
-  };
+  const { selectedCountry, setSelectedCountry, countries, fetchCountries } =
+    useContext(Context);
 
   useEffect(() => {
     fetchCountries();
@@ -19,7 +13,7 @@ const CountrySelection = ({ countryCode }) => {
 
   useEffect(() => {
     setSelectedCountry(countries.find((c) => c.cca2 === countryCode));
-  }, [countryCode, countries]);
+  }, [countryCode, countries, setSelectedCountry]);
 
   return (
     <Box>
