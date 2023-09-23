@@ -8,7 +8,6 @@ const Airports = () => {
   const [airportsData, setAirportsData] = useState([]);
 
   const fetchAirports = async (country) => {
-    console.log(country);
     const response = await fetch(
       `https://api.api-ninjas.com/v1/airports?country=${country}&name=`,
       {
@@ -20,15 +19,11 @@ const Airports = () => {
     setAirportsData(data);
   };
 
-  console.log(selectedCountry?.cca2);
-
   useEffect(() => {
     if (selectedCountry?.cca2) {
       fetchAirports(selectedCountry?.cca2);
     }
   }, [selectedCountry]);
-
-  console.log(airportsData);
 
   return (
     <StyledBoxComponent>
@@ -39,17 +34,23 @@ const Airports = () => {
         <Input placeholder="Search for airport" />
       </FormControl>
       <Grid container spacing={{ xs: 2 }} style={{ marginTop: "16px" }}>
-        {airportsData.map((a, index) => (
-          <React.Fragment key={index}>
-            {a.iata && (
-              <Grid item xs={12} md={6}>
-                <Typography variant="body1">
-                  {a.iata} - {a.name} ({a.city})
-                </Typography>
-              </Grid>
-            )}
-          </React.Fragment>
-        ))}
+        {airportsData.length > 0 ? (
+          airportsData.map((a, index) => (
+            <React.Fragment key={index}>
+              {a.iata && (
+                <Grid item xs={12} md={6}>
+                  <Typography variant="body1">
+                    {a.iata} - {a.name} ({a.city})
+                  </Typography>
+                </Grid>
+              )}
+            </React.Fragment>
+          ))
+        ) : (
+          <Typography variant="body1" color={"red"} ml={2}>
+            There are no airports found 😟
+          </Typography>
+        )}
       </Grid>
     </StyledBoxComponent>
   );
