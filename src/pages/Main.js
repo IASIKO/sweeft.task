@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import CountrySelection from "../components/CountrySelection";
+import MainNavigator from "../components/MainNavigator";
 import { Outlet } from "react-router-dom";
 
 const StyledBox = styled(Box)(() => ({
@@ -38,7 +39,8 @@ const Main = () => {
   return (
     <StyledBox>
       <CountrySelection countryCode={countryCode} />
-      <Outlet/>
+      <MainNavigator />
+      <Outlet />
     </StyledBox>
   );
 };
