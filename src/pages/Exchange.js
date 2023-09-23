@@ -4,7 +4,7 @@ import {
   Autocomplete,
   FormControl,
   Input,
-  InputLabel,
+  InputAdornment,
   Stack,
   TextField,
   Typography,
@@ -39,14 +39,21 @@ const Exchange = () => {
         onChange={(e, newValue) => setSelectedCountry(newValue)}
       />
       <Stack direction="row" spacing={2} mt={2}>
-        <FormControl fullWidth>
-          <InputLabel variant="filled" shrink={false}>₾</InputLabel>
-          <Input type="number"></Input>
+        <FormControl fullWidth sx={{ m: 1 }} variant="standard">
+          <Input
+            type="number"
+            startAdornment={<InputAdornment position="start">₾</InputAdornment>}
+          />
         </FormControl>
+
         <Typography variant="h4">=</Typography>
-        <FormControl fullWidth>
-          <InputLabel variant="filled"></InputLabel>
-          <Input type="number" disabled />
+
+        <FormControl fullWidth sx={{ m: 1 }} variant="standard">
+          <Input
+            type="number"
+            disabled
+            startAdornment={<InputAdornment position="start">$</InputAdornment>}
+          />
         </FormControl>
       </Stack>
     </StyledBoxComponent>

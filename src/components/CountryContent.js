@@ -3,7 +3,6 @@ import React from "react";
 import StyledBoxComponent from "../UI/StyledBoxComponent";
 
 const CountryContent = ({ selectedCountry }) => {
-  console.log(selectedCountry);
 
   return (
     <StyledBoxComponent>
