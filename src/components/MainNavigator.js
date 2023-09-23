@@ -1,8 +1,9 @@
+import React, { useState } from "react";
 import { Box, Tab, Tabs } from "@mui/material";
-import React from "react";
+import { NavLink } from "react-router-dom";
 
 const MainNavigator = () => {
-  const [value, setValue] = React.useState("/");
+  const [value, setValue] = useState("/");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -17,8 +18,18 @@ const MainNavigator = () => {
         indicatorColor="primary"
         aria-label="primary tabs example"
       >
-        <Tab value="/" label="CURRENCY EXCHANGE" />
-        <Tab value="/airports" label="AIRPORTS" />
+        <Tab
+          value="/"
+          label="CURRENCY EXCHANGE"
+          LinkComponent={NavLink}
+          to={"/"}
+        />
+        <Tab
+          value="/airports"
+          label="AIRPORTS"
+          LinkComponent={NavLink}
+          to={"/airports"}
+        />
       </Tabs>
     </Box>
   );

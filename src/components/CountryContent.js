@@ -59,7 +59,7 @@ const CountryContent = ({ selectedCountry }) => {
                   </Typography>
                 </Grid>
                 <Grid item md={9}>
-                  {Object.keys(selectedCountry.currencies).map((index) => (
+                  {Object.keys(selectedCountry.currencies)?.map((index) => (
                     <Typography variant="body2" key={index}>
                       {selectedCountry.currencies[index].name} (
                       {selectedCountry.currencies[index].symbol})
@@ -109,7 +109,7 @@ const CountryContent = ({ selectedCountry }) => {
                 </Grid>
                 <Grid item md={9}>
                   <Typography variant="body2">
-                    {selectedCountry.borders.join(", ")}
+                    {selectedCountry.borders?.join(", ")}
                   </Typography>
                 </Grid>
               </Grid>

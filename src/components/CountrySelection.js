@@ -10,7 +10,7 @@ const CountrySelection = ({ countryCode }) => {
     const response = await fetch("https://restcountries.com/v3.1/all");
 
     const data = await response.json();
-    setCountries(data)
+    setCountries(data);
   };
 
   useEffect(() => {
@@ -20,7 +20,6 @@ const CountrySelection = ({ countryCode }) => {
   useEffect(() => {
     setSelectedCountry(countries.find((c) => c.cca2 === countryCode));
   }, [countryCode, countries]);
-
 
   return (
     <Box>
