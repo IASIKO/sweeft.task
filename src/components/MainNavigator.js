@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import { Box, Tab, Tabs } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const MainNavigator = () => {
-  const [value, setValue] = useState("/");
+  const location = useLocation();
+  const getInitialTabValue = (pathname) => {
+    if (pathname === "/airports") {
+      return 1;
+    }
+    return 0;
+  };
+  const [value, setValue] = useState(getInitialTabValue(location.pathname));
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -14,22 +21,17 @@ const MainNavigator = () => {
       <Tabs
         value={value}
         onChange={handleChange}
-        textColor="primary"
+        aria-label="Navigation"
         indicatorColor="primary"
-        aria-label="primary tabs example"
+        textColor="primary"
       >
         <Tab
-          value="/"
           label="CURRENCY EXCHANGE"
-          LinkComponent={NavLink}
+          index={0}
+          LinkComponent={Link}
           to={"/"}
         />
-        <Tab
-          value="/airports"
-          label="AIRPORTS"
-          LinkComponent={NavLink}
-          to={"/airports"}
-        />
+        <Tab label="AIRPORTS" index={1} LinkComponent={Link} to={"/airports"} />
       </Tabs>
     </Box>
   );

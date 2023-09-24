@@ -26,7 +26,7 @@ const Airports = () => {
         fetchAirports(selectedCountry.cca2, searchValue);
       } else {
         if (selectedCountry?.cca2) {
-          fetchAirports(selectedCountry?.cca2);
+          fetchAirports(selectedCountry?.cca2, '');
         }
       }
     }, 500);
