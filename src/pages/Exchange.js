@@ -14,8 +14,11 @@ import { Context } from "../store/ContextProvider";
 const Exchange = () => {
   const [selectedExchangeCountry, setSelectedExchangeCountry] = useState(null);
   const [currency, setCurrency] = useState();
+  const [fromValue, setFromValue] = useState(0);
+  const [toValue, setToValue] = useState(0);
 
-  const { countries, fetchCountries, selectedCountry } = useContext(Context);
+  const { countries, fetchCountries, selectedCountry, countryCode } =
+    useContext(Context);
 
   const fetchCurrency = async (cur) => {
     const response = await fetch(
@@ -37,7 +40,26 @@ const Exchange = () => {
     }
   }, [selectedCountry]);
 
-  console.log(currency);
+  useEffect(() => {
+    setSelectedExchangeCountry(countries.find((c) => c.cca2 === countryCode));
+  }, [countryCode, countries]);
+
+  const countChangeHandler = (e) => {
+    const key = Object.keys(selectedExchangeCountry?.currencies)[0];
+    console.log(key);
+    const amount = e.target.value;
+
+    if (!isNaN(amount)) {
+      setFromValue(amount);
+
+      if (currency) {
+        console.log(currency);
+        const exchangeRate = currency.rates[key];
+        const convertedValue = amount * exchangeRate;
+        setToValue(convertedValue);
+      }
+    }
+  };
 
   return (
     <StyledBoxComponent>
@@ -56,7 +78,8 @@ const Exchange = () => {
         <FormControl fullWidth sx={{ m: 1 }} variant="standard">
           <Input
             type="number"
-            defaultValue={0}
+            value={fromValue}
+            onChange={countChangeHandler}
             startAdornment={
               <InputAdornment position="start">
                 {selectedCountry &&
@@ -75,7 +98,7 @@ const Exchange = () => {
         <FormControl fullWidth sx={{ m: 1 }} variant="standard">
           <Input
             type="number"
-            defaultValue={0}
+            value={toValue}
             disabled
             startAdornment={
               <InputAdornment position="start">
