@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import StyledBoxComponent from "../UI/StyledBoxComponent";
 import {
   Autocomplete,
@@ -9,21 +9,35 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import { Context } from "../store/ContextProvider";
 
 const Exchange = () => {
-  const [countries, setCountries] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState(null);
+  const [selectedExchangeCountry, setSelectedExchangeCountry] = useState(null);
+  const [currency, setCurrency] = useState();
 
-  const fetchCountries = async () => {
-    const response = await fetch("https://restcountries.com/v3.1/all");
+  const { countries, fetchCountries, selectedCountry } = useContext(Context);
+
+  const fetchCurrency = async (cur) => {
+    const response = await fetch(
+      `https://api.exchangerate.host/latest?base=${cur}`
+    );
 
     const data = await response.json();
-    setCountries(data);
+    setCurrency(data);
   };
 
   useEffect(() => {
     fetchCountries();
   }, []);
+
+  useEffect(() => {
+    if (selectedCountry?.currencies) {
+      const key = Object.keys(selectedCountry?.currencies)[0];
+      fetchCurrency(key);
+    }
+  }, [selectedCountry]);
+
+  console.log(currency);
 
   return (
     <StyledBoxComponent>
@@ -35,14 +49,24 @@ const Exchange = () => {
         options={countries}
         getOptionLabel={(option) => option.name.common}
         renderInput={(params) => <TextField {...params} variant="standard" />}
-        value={selectedCountry || null}
-        onChange={(e, newValue) => setSelectedCountry(newValue)}
+        value={selectedExchangeCountry || null}
+        onChange={(e, newValue) => setSelectedExchangeCountry(newValue)}
       />
       <Stack direction="row" spacing={2} mt={2}>
         <FormControl fullWidth sx={{ m: 1 }} variant="standard">
           <Input
             type="number"
-            startAdornment={<InputAdornment position="start">₾</InputAdornment>}
+            defaultValue={0}
+            startAdornment={
+              <InputAdornment position="start">
+                {selectedCountry &&
+                  Object.keys(selectedCountry.currencies)?.map((index) => (
+                    <Typography variant="body2" key={index}>
+                      {selectedCountry.currencies[index].symbol}
+                    </Typography>
+                  ))}
+              </InputAdornment>
+            }
           />
         </FormControl>
 
@@ -51,8 +75,20 @@ const Exchange = () => {
         <FormControl fullWidth sx={{ m: 1 }} variant="standard">
           <Input
             type="number"
+            defaultValue={0}
             disabled
-            startAdornment={<InputAdornment position="start">$</InputAdornment>}
+            startAdornment={
+              <InputAdornment position="start">
+                {selectedExchangeCountry &&
+                  Object.keys(selectedExchangeCountry?.currencies)?.map(
+                    (index) => (
+                      <Typography variant="body2" key={index}>
+                        {selectedExchangeCountry?.currencies[index].symbol}
+                      </Typography>
+                    )
+                  )}
+              </InputAdornment>
+            }
           />
         </FormControl>
       </Stack>

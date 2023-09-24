@@ -39,7 +39,7 @@ const CountryContent = ({ selectedCountry }) => {
               <Grid container spacing={{ xs: 1 }}>
                 <Grid item md={3}>
                   <Typography variant="body1" fontWeight={600}>
-                    Continents:
+                    Continent:
                   </Typography>
                 </Grid>
                 <Grid item md={9}>
