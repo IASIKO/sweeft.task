@@ -7,37 +7,64 @@ const Airports = () => {
   const { selectedCountry } = useContext(Context);
   const [airportsData, setAirportsData] = useState([]);
   const [searchValue, setSearchValue] = useState("");
+  const [cache, setCache] = useState({});
 
-  const fetchAirports = async (country, name) => {
-    const response = await fetch(
-      `https://api.api-ninjas.com/v1/airports?country=${country}&name=${name}`,
-      {
-        headers: { "X-Api-Key": "gCj5I7rGBqfKSYWRfkr2+g==QgM7Oha3XwapUYSa" },
+  const fetchAirports = async () => {
+    if (selectedCountry?.cca2) {
+      if (
+        !cache[selectedCountry.cca2] ||
+        !cache[selectedCountry.cca2].find((d) => d.searchValue === searchValue)
+      ) {
+        const response = await fetch(
+          `https://api.api-ninjas.com/v1/airports?country=${selectedCountry.cca2}&name=${searchValue}`,
+          {
+            headers: {
+              "X-Api-Key": "gCj5I7rGBqfKSYWRfkr2+g==QgM7Oha3XwapUYSa",
+            },
+          }
+        );
+
+        const data = await response.json();
+        setAirportsData(data);
+        if (Object.keys(cache).includes(selectedCountry.cca2)) {
+          if (
+            !cache[selectedCountry.cca2].find(
+              (d) => d.searchValue === searchValue
+            )
+          ) {
+            cache[selectedCountry.cca2] = [
+              ...cache[selectedCountry.cca2],
+              { searchValue, data },
+            ];
+            setCache(cache);
+          }
+        } else {
+          cache[selectedCountry.cca2] = [{ searchValue, data }];
+          setCache(cache);
+        }
+      } else {
+        setAirportsData(
+          cache[selectedCountry.cca2].find((d) => d.searchValue === searchValue)
+            .data
+        );
       }
-    );
-
-    const data = await response.json();
-    setAirportsData(data);
+    }
   };
 
   useEffect(() => {
     const timerId = setTimeout(() => {
       if (searchValue && selectedCountry?.cca2) {
-        fetchAirports(selectedCountry.cca2, searchValue);
+        fetchAirports();
       } else {
         if (selectedCountry?.cca2) {
-          fetchAirports(selectedCountry?.cca2, '');
+          fetchAirports();
         }
       }
     }, 500);
     return () => {
       clearTimeout(timerId);
     };
-  }, [selectedCountry, searchValue]);
-
-  const filteredAirports = airportsData.filter((airport) =>
-    airport.name.toLowerCase().includes(searchValue.toLowerCase())
-  );
+  }, [selectedCountry, searchValue, cache]);
 
   return (
     <StyledBoxComponent>
@@ -52,8 +79,8 @@ const Airports = () => {
         />
       </FormControl>
       <Grid container spacing={{ xs: 2 }} style={{ marginTop: "16px" }}>
-        {filteredAirports.length > 0 ? (
-          filteredAirports.map((a, index) => (
+        {airportsData.length > 0 ? (
+          airportsData.map((a, index) => (
             <React.Fragment key={index}>
               {a.iata && (
                 <Grid item xs={12} md={6}>
