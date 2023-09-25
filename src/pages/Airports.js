@@ -104,11 +104,22 @@ const Airports = () => {
         ) : (
           <>
             {isLoading ? (
-              <Box sx={{ width: 300 }} ml={2}>
-                <Skeleton />
-                <Skeleton animation="wave" />
-                <Skeleton animation={false} />
-              </Box>
+              <Grid container spacing={{ xs: 2 }}>
+                <Grid item xs={12} md={6}>
+                  <Box sx={{ width: 300 }} ml={2}>
+                    <Skeleton style={{ width: "60%" }} />
+                    <Skeleton animation="wave" style={{ width: "80%" }} />
+                    <Skeleton animation={false} />
+                  </Box>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Box sx={{ width: 300 }} ml={2}>
+                    <Skeleton style={{ width: "60%" }} />
+                    <Skeleton animation="wave" style={{ width: "80%" }} />
+                    <Skeleton animation={false} />
+                  </Box>
+                </Grid>
+              </Grid>
             ) : (
               <Typography variant="body1" color={"red"} ml={2}>
                 There are no airports found 😟

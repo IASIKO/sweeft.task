@@ -117,10 +117,10 @@ const CountryContent = ({ selectedCountry }) => {
           </Grid>
         </>
       ) : (
-        <Box sx={{ width: 300 }}>
+        <Box sx={{ width: 300 }} ml={2}>
           <Skeleton />
-          <Skeleton animation="wave" />
-          <Skeleton animation={false} />
+          <Skeleton animation="pulse" />
+          <Skeleton animation={false} text wave/>
         </Box>
       )}
     </StyledBoxComponent>
