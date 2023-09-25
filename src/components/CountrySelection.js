@@ -2,10 +2,12 @@ import { Autocomplete, Box, TextField } from "@mui/material";
 import React, { useContext, useEffect } from "react";
 import CountryContent from "./CountryContent";
 import { Context } from "../store/ContextProvider";
+import { useNavigate } from "react-router-dom";
 
 const CountrySelection = ({ countryCode }) => {
   const { selectedCountry, setSelectedCountry, countries } =
     useContext(Context);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setSelectedCountry(countries.find((c) => c.cca2 === countryCode));
@@ -34,7 +36,11 @@ const CountrySelection = ({ countryCode }) => {
           />
         )}
         value={selectedCountry || null}
-        onChange={(e, newValue) => setSelectedCountry(newValue)}
+        onChange={(e, newValue) => {
+          if (newValue?.cca3) {
+            navigate(`/${newValue?.cca3}`);
+          }
+        }}
       />
       <CountryContent selectedCountry={selectedCountry} />
     </Box>

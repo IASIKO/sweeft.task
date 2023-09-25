@@ -1,12 +1,11 @@
 import React, { useContext, useState } from "react";
 import { Box, Tab, Tabs } from "@mui/material";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Context } from "../store/ContextProvider";
 
 const MainNavigator = () => {
   const { selectedCountry } = useContext(Context);
 
-  const params = useParams();
   const location = useLocation();
   const getInitialTabValue = (pathname) => {
     if (pathname === `/${selectedCountry?.cca3}/airports`) {
