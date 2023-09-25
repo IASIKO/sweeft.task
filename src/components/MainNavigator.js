@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Box, Tab, Tabs } from "@mui/material";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
+import { Context } from "../store/ContextProvider";
 
 const MainNavigator = () => {
+  const { selectedCountry } = useContext(Context);
+
+  const params = useParams();
   const location = useLocation();
   const getInitialTabValue = (pathname) => {
-    if (pathname === "/airports") {
+    if (pathname === `/${selectedCountry?.cca3}/airports`) {
       return 1;
     }
     return 0;
@@ -29,9 +33,9 @@ const MainNavigator = () => {
           label="CURRENCY EXCHANGE"
           index={0}
           LinkComponent={Link}
-          to={"/"}
+          to={`/${selectedCountry.cca3}`}
         />
-        <Tab label="AIRPORTS" index={1} LinkComponent={Link} to={"/airports"} />
+        <Tab label="AIRPORTS" index={1} LinkComponent={Link} to={`/${selectedCountry.cca3}/airports`} />
       </Tabs>
     </Box>
   );

@@ -4,12 +4,8 @@ import CountryContent from "./CountryContent";
 import { Context } from "../store/ContextProvider";
 
 const CountrySelection = ({ countryCode }) => {
-  const { selectedCountry, setSelectedCountry, countries, fetchCountries } =
+  const { selectedCountry, setSelectedCountry, countries } =
     useContext(Context);
-
-  useEffect(() => {
-    fetchCountries();
-  }, []);
 
   useEffect(() => {
     setSelectedCountry(countries.find((c) => c.cca2 === countryCode));

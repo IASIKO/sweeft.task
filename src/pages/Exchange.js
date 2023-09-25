@@ -17,8 +17,7 @@ const Exchange = () => {
   const [fromValue, setFromValue] = useState(0);
   const [toValue, setToValue] = useState(0);
 
-  const { countries, fetchCountries, selectedCountry, countryCode } =
-    useContext(Context);
+  const { countries, selectedCountry, countryCode } = useContext(Context);
 
   const fetchCurrency = async (cur) => {
     const response = await fetch(
@@ -30,36 +29,33 @@ const Exchange = () => {
   };
 
   useEffect(() => {
-    fetchCountries();
-  }, []);
-
-  useEffect(() => {
     if (selectedCountry?.currencies) {
       const key = Object.keys(selectedCountry?.currencies)[0];
       fetchCurrency(key);
     }
-  }, [selectedCountry]);
+  }, [selectedCountry, selectedExchangeCountry]);
 
   useEffect(() => {
     setSelectedExchangeCountry(countries.find((c) => c.cca2 === countryCode));
   }, [countryCode, countries]);
 
-  const countChangeHandler = (e) => {
-    const key = Object.keys(selectedExchangeCountry?.currencies)[0];
-    console.log(key);
-    const amount = e.target.value;
+  const countChangeHandler = () => {
+    if (selectedExchangeCountry?.currencies) {
+      const key = Object.keys(selectedExchangeCountry?.currencies)[0];
 
-    if (!isNaN(amount)) {
-      setFromValue(amount);
-
-      if (currency) {
-        console.log(currency);
-        const exchangeRate = currency.rates[key];
-        const convertedValue = amount * exchangeRate;
-        setToValue(convertedValue);
+      if (!isNaN(fromValue)) {
+        if (currency) {
+          const exchangeRate = currency.rates[key];
+          const convertedValue = fromValue * exchangeRate;
+          setToValue(convertedValue);
+        }
       }
     }
   };
+
+  useEffect(() => {
+    countChangeHandler();
+  }, [selectedExchangeCountry, fromValue]);
 
   return (
     <StyledBoxComponent>
@@ -79,7 +75,7 @@ const Exchange = () => {
           <Input
             type="number"
             value={fromValue}
-            onChange={countChangeHandler}
+            onChange={(e) => setFromValue(e.target.value)}
             startAdornment={
               <InputAdornment position="start">
                 {selectedCountry &&

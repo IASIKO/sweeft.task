@@ -9,28 +9,41 @@ const ContextProvider = ({ children }) => {
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [countryCode, setCountryCode] = useState();
 
-  const locationFunction = () => {
-    const succesFunction = async (position) => {
-      const response = await fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=AIzaSyAFsPNmuVgvkUxOMraQlXswL6Yja7lz_FU`
-      );
+  const locationFunction = async (currentRoute = "/") => {
+    const responseCountries = await fetch(
+      "https://restcountries.com/v3.1/all"
+    );
 
-      const data = await response.json();
+    const countriesData = await responseCountries.json();
+    setCountries(countriesData);
 
-      setCountryCode(data.results[0].address_components[5].short_name);
-    };
-    const errorFunction = (error) => {
-      console.error("Error getting location:", error);
-    };
+    if (currentRoute === "/") {
+  
+      const succesFunction = async (position) => {
+        const response = await fetch(
+          `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=AIzaSyAFsPNmuVgvkUxOMraQlXswL6Yja7lz_FU`
+        );
 
-    navigator.geolocation.getCurrentPosition(succesFunction, errorFunction);
-  };
+        const data = await response.json();
 
-  const fetchCountries = async () => {
-    const response = await fetch("https://restcountries.com/v3.1/all");
+        const countryCodeResponse = data.results[0].address_components[5].short_name;
+        const selectedCountryResponse = countriesData.find(
+          (c) => c.cca2 === countryCodeResponse
+        );
 
-    const data = await response.json();
-    setCountries(data);
+        setCountryCode(countryCodeResponse);
+        setSelectedCountry(selectedCountryResponse);
+      };
+      const errorFunction = (error) => {
+        console.error("Error getting location:", error);
+      };
+
+      navigator.geolocation.getCurrentPosition(succesFunction, errorFunction);
+    }
+    else {
+      setCountryCode(countriesData.find(c => c.cca3 === currentRoute).cca2)
+      setSelectedCountry(countriesData.find(c => c.cca3 === currentRoute))
+    }
   };
 
   return (
@@ -40,9 +53,9 @@ const ContextProvider = ({ children }) => {
         setSelectedCountry,
         countries,
         setCountries,
-        fetchCountries,
         countryCode,
-        locationFunction
+        setCountryCode,
+        locationFunction,
       }}
     >
       {children}

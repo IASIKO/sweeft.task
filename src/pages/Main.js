@@ -3,7 +3,7 @@ import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import CountrySelection from "../components/CountrySelection";
 import MainNavigator from "../components/MainNavigator";
-import { Outlet } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import { Context } from "../store/ContextProvider";
 
 const StyledBox = styled(Box)(() => ({
@@ -14,18 +14,24 @@ const StyledBox = styled(Box)(() => ({
 }));
 
 const Main = () => {
-  const { countryCode, locationFunction } = useContext(Context);
+  const { selectedCountry, countryCode, locationFunction } =
+    useContext(Context);
+  const params = useParams();
 
   useEffect(() => {
-    locationFunction();
-  }, []);
+    locationFunction(`${params.country}`);
+  }, [params]);
 
   return (
-    <StyledBox>
-      <CountrySelection countryCode={countryCode} />
-      <MainNavigator />
-      <Outlet />
-    </StyledBox>
+    <>
+      {selectedCountry && (
+        <StyledBox>
+          <CountrySelection countryCode={countryCode} />
+          <MainNavigator />
+          <Outlet />
+        </StyledBox>
+      )}
+    </>
   );
 };
 
