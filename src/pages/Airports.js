@@ -106,17 +106,17 @@ const Airports = () => {
             {isLoading ? (
               <Grid container spacing={{ xs: 2 }}>
                 <Grid item xs={12} md={6}>
-                  <Box sx={{ width: 300 }} ml={2}>
-                    <Skeleton style={{ width: "60%" }} />
-                    <Skeleton animation="wave" style={{ width: "80%" }} />
-                    <Skeleton animation={false} />
+                  <Box sx={{ width: 400 }} ml={2}>
+                    <Skeleton animation="pulse" style={{ width: "60%" }} />
+                    <Skeleton animation="pulse" style={{ width: "80%" }} />
+                    <Skeleton animation="wave" />
                   </Box>
                 </Grid>
                 <Grid item xs={12} md={6}>
-                  <Box sx={{ width: 300 }} ml={2}>
-                    <Skeleton style={{ width: "60%" }} />
-                    <Skeleton animation="wave" style={{ width: "80%" }} />
-                    <Skeleton animation={false} />
+                  <Box sx={{ width: 400 }} ml={2}>
+                    <Skeleton animation="pulse" style={{ width: "60%" }} />
+                    <Skeleton animation="pulse" style={{ width: "80%" }} />
+                    <Skeleton animation="wave" />
                   </Box>
                 </Grid>
               </Grid>
