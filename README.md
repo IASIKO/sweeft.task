@@ -33,6 +33,15 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+## Usage
+On the home page, you can use the search bar to find information about a specific country.
+
+Navigate to the "Currency Exchange" page to get exchange rates and perform currency conversions.
+
+Explore the "Airport Data" page to access information about airports in different countries.
+
+
+
 ### `npm start`
 
 Runs the app in the development mode.\
