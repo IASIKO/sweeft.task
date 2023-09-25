@@ -1,11 +1,11 @@
-import { Grid, Typography } from "@mui/material";
+import { Box, Grid, Skeleton, Typography } from "@mui/material";
 import React from "react";
 import StyledBoxComponent from "../UI/StyledBoxComponent";
 
 const CountryContent = ({ selectedCountry }) => {
   return (
     <StyledBoxComponent>
-      {selectedCountry && (
+      {selectedCountry ? (
         <>
           <Typography variant="h4" mb={2}>
             {selectedCountry.name.common}
@@ -116,6 +116,12 @@ const CountryContent = ({ selectedCountry }) => {
             </Grid>
           </Grid>
         </>
+      ) : (
+        <Box sx={{ width: 300 }}>
+          <Skeleton />
+          <Skeleton animation="wave" />
+          <Skeleton animation={false} />
+        </Box>
       )}
     </StyledBoxComponent>
   );

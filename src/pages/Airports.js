@@ -1,6 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import StyledBoxComponent from "../UI/StyledBoxComponent";
-import { FormControl, Grid, Input, Typography } from "@mui/material";
+import {
+  Box,
+  FormControl,
+  Grid,
+  Input,
+  Skeleton,
+  Typography,
+} from "@mui/material";
 import { Context } from "../store/ContextProvider";
 
 const Airports = () => {
@@ -8,8 +15,10 @@ const Airports = () => {
   const [airportsData, setAirportsData] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [cache, setCache] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchAirports = async () => {
+    setIsLoading(true);
     if (selectedCountry?.cca2) {
       if (
         !cache[selectedCountry.cca2] ||
@@ -26,6 +35,7 @@ const Airports = () => {
 
         const data = await response.json();
         setAirportsData(data);
+        setIsLoading(false);
         if (Object.keys(cache).includes(selectedCountry.cca2)) {
           if (
             !cache[selectedCountry.cca2].find(
@@ -92,9 +102,19 @@ const Airports = () => {
             </React.Fragment>
           ))
         ) : (
-          <Typography variant="body1" color={"red"} ml={2}>
-            There are no airports found 😟
-          </Typography>
+          <>
+            {isLoading ? (
+              <Box sx={{ width: 300 }} ml={2}>
+                <Skeleton />
+                <Skeleton animation="wave" />
+                <Skeleton animation={false} />
+              </Box>
+            ) : (
+              <Typography variant="body1" color={"red"} ml={2}>
+                There are no airports found 😟
+              </Typography>
+            )}
+          </>
         )}
       </Grid>
     </StyledBoxComponent>
