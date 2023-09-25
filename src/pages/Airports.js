@@ -15,7 +15,7 @@ const Airports = () => {
   const [airportsData, setAirportsData] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [cache, setCache] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchAirports = async () => {
     setIsLoading(true);
