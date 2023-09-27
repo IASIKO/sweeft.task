@@ -1,6 +1,6 @@
 {
   "name": "sweeft.task",
-  "homepage": "https://IASIKO.github.io/sweeft.task",
+  "homepage": "./sweeft.task",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
