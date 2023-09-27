@@ -18,7 +18,9 @@ const router = createBrowserRouter([
       { path: "/:country/airports", element: <Airports /> },
     ],
   },
-]);
+], {
+  basename: '/sweeft.task/'
+});
 
 function App() {
   return <RouterProvider router={router}></RouterProvider>;
