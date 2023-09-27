@@ -38,10 +38,9 @@ const ContextProvider = ({ children }) => {
 
       navigator.geolocation.getCurrentPosition(succesFunction, errorFunction);
     } else {
-      if (countriesData) {
-        setCountryCode(countriesData?.find((c) => c.cca3 === currentRoute)?.cca2);
+      setCountryCode(countriesData.find((c) => c.cca3 === currentRoute).cca2);
+      console.log(countriesData.find((c) => c.cca3 === currentRoute).cca2);
         setSelectedCountry(countriesData.find((c) => c.cca3 === currentRoute));
-      }
     }
   };
 
