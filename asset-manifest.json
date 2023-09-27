@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/sweeft.task/static/css/main.bbfdcf35.css",
-    "main.js": "/sweeft.task/static/js/main.e7e68565.js",
+    "main.js": "/sweeft.task/static/js/main.dfc89003.js",
     "index.html": "/sweeft.task/index.html",
     "main.bbfdcf35.css.map": "/sweeft.task/static/css/main.bbfdcf35.css.map",
-    "main.e7e68565.js.map": "/sweeft.task/static/js/main.e7e68565.js.map"
+    "main.dfc89003.js.map": "/sweeft.task/static/js/main.dfc89003.js.map"
   },
   "entrypoints": [
     "static/css/main.bbfdcf35.css",
-    "static/js/main.e7e68565.js"
+    "static/js/main.dfc89003.js"
   ]
 }
