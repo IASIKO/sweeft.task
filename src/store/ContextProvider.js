@@ -15,7 +15,7 @@ const ContextProvider = ({ children }) => {
     const countriesData = await responseCountries.json();
     setCountries(countriesData);
 
-    if (currentRoute === "/sweeft.task") {
+    if (currentRoute === "/") {
       const succesFunction = async (position) => {
         const response = await fetch(
           `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=AIzaSyAFsPNmuVgvkUxOMraQlXswL6Yja7lz_FU`

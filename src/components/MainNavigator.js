@@ -9,7 +9,7 @@ const MainNavigator = () => {
   const location = useLocation();
 
   const getInitialTabValue = (pathname) => {
-    if (pathname === `/sweeft.task/${selectedCountry?.cca3}/airports`) {
+    if (pathname === `/${selectedCountry?.cca3}/airports`) {
       return 1;
     }
     return 0;
@@ -37,13 +37,13 @@ const MainNavigator = () => {
           label="CURRENCY EXCHANGE"
           index={0}
           LinkComponent={Link}
-          to={`/sweeft.task/${selectedCountry.cca3}`}
+          to={`/${selectedCountry.cca3}`}
         />
         <Tab
           label="AIRPORTS"
           index={1}
           LinkComponent={Link}
-          to={`/sweeft.task/${selectedCountry.cca3}/airports`}
+          to={`/${selectedCountry.cca3}/airports`}
         />
       </Tabs>
     </Box>

@@ -9,7 +9,7 @@ const RootLayout = () => {
   useEffect(() => {
     locationFunction();
     if(selectedCountry?.cca3) {
-      navigate(`/sweeft.task/${selectedCountry?.cca3}`)
+      navigate(`/${selectedCountry?.cca3}`)
     }
   }, [selectedCountry]);
 };
