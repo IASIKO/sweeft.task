@@ -1,6 +1,5 @@
 import "./App.css";
 import {
-  HashRouter,
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
@@ -29,9 +28,7 @@ const router = createBrowserRouter(
 
 function App() {
   return (
-    <HashRouter basename="/sweeft.task">
-      <RouterProvider router={router}></RouterProvider>;
-    </HashRouter>
+      <RouterProvider router={router}></RouterProvider>
   );
 }
 
