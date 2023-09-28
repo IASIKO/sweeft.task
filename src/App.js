@@ -12,15 +12,15 @@ import Exchange from "./pages/Exchange";
 const router = createBrowserRouter(
   [
     {
-      path: "/",
+      path: "/sweeft.task",
       element: <RootLayout />,
     },
     {
-      path: "/:country",
+      path: "/sweeft.task/:country",
       element: <Main />,
       children: [
-        { path: "/:country", element: <Exchange /> },
-        { path: "/:country/airports", element: <Airports /> },
+        { path: "/sweeft.task/:country", element: <Exchange /> },
+        { path: "/sweeft.task/:country/airports", element: <Airports /> },
       ],
     },
   ],

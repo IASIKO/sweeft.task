@@ -19,7 +19,7 @@ const Main = () => {
   const params = useParams();
 
   useEffect(() => {
-    locationFunction(`${params.country}`);
+    locationFunction(`/sweeft.task/${params.country}`);
   }, [params]);
 
   return (
