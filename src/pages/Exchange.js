@@ -43,7 +43,7 @@ const Exchange = () => {
     if (selectedExchangeCountry?.currencies) {
       const key = Object.keys(selectedExchangeCountry?.currencies)[0];
 
-      if (!isNaN(fromValue)) {
+      if (!isNaN(fromValue) && currency && currency.rates && currency.rates[key]) {
         if (currency) {
           const exchangeRate = currency.rates[key];
           const convertedValue = fromValue * exchangeRate;
