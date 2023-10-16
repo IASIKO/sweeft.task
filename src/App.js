@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
 import RootLayout from "./pages/RootLayout";
 import Airports from "./pages/Airports";
 import Main from "./pages/Main";
@@ -7,7 +7,7 @@ import Exchange from "./pages/Exchange";
 
 function App() {
   return (
-    <BrowserRouter basename="/sweeft.task">
+    // <BrowserRouter basename="/sweeft.task">
       <Routes>
         <Route path="/" element={<RootLayout />} />
         <Route path="/:country" element={<Main />}>
@@ -15,7 +15,7 @@ function App() {
           <Route path="airports" element={<Airports />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    // </BrowserRouter>
   );
 }
 
