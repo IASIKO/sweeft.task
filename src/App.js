@@ -34,7 +34,7 @@ function App() {
   return (
     // <RouterProvider router={router}></RouterProvider>
 
-    <BrowserRouter basename="/">
+    <BrowserRouter basename="/sweeft.task">
       <Routes>
         <Route path="/" element={<RootLayout />} />
         <Route path="/:country" element={<Main />}>
