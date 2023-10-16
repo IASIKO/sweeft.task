@@ -21,7 +21,7 @@ const Exchange = () => {
 
   const fetchCurrency = async (cur) => {
     const response = await fetch(
-      `https://api.exchangerate.host/latest?base=${cur}`
+      `https://api.exchangerate.host/live?access_key=234025e5e8cfd611f700472e42769f71&source=${cur}`
     );
 
     const data = await response.json();
@@ -43,7 +43,12 @@ const Exchange = () => {
     if (selectedExchangeCountry?.currencies) {
       const key = Object.keys(selectedExchangeCountry?.currencies)[0];
 
-      if (!isNaN(fromValue) && currency && currency.rates && currency.rates[key]) {
+      if (
+        !isNaN(fromValue) &&
+        currency &&
+        currency.rates &&
+        currency.rates[key]
+      ) {
         if (currency) {
           const exchangeRate = currency.rates[key];
           const convertedValue = fromValue * exchangeRate;
