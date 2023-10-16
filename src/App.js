@@ -1,6 +1,9 @@
 import "./App.css";
 import {
+  HashRouter,
+  Route,
   RouterProvider,
+  Routes,
   createBrowserRouter,
 } from "react-router-dom";
 import RootLayout from "./pages/RootLayout";
@@ -28,7 +31,17 @@ const router = createBrowserRouter(
 
 function App() {
   return (
-      <RouterProvider router={router}></RouterProvider>
+    <RouterProvider router={router}></RouterProvider>
+
+    // <HashRouter basename="">
+    //   <Routes>
+    //     <Route path="/" element={<RootLayout />} />
+    //     <Route path="/:country" element={<Main />}>
+    //       <Route path="exchange" element={<Exchange />} />
+    //       <Route path="airports" element={<Airports />} />
+    //     </Route>
+    //   </Routes>
+    // </HashRouter>
   );
 }
 
