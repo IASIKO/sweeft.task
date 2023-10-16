@@ -25,21 +25,31 @@ const ContextProvider = ({ children }) => {
 
         const countryCodeResponse =
           data.results[0].address_components[5].short_name;
-        const selectedCountryResponse = countriesData.find(
-          (c) => c.cca2 === countryCodeResponse
-        );
+        if (countryCodeResponse) {
+          const selectedCountryResponse = countriesData.find(
+            (c) => c.cca2 === countryCodeResponse
+          );
 
-        setCountryCode(countryCodeResponse);
-        setSelectedCountry(selectedCountryResponse);
+          setCountryCode(countryCodeResponse);
+          setSelectedCountry(selectedCountryResponse);
+        }
       };
+
       const errorFunction = (error) => {
         console.error("Error getting location:", error);
       };
 
       navigator.geolocation.getCurrentPosition(succesFunction, errorFunction);
     } else {
-      setCountryCode(countriesData.find((c) => c.cca3 === currentRoute)?.cca2);
-      setSelectedCountry(countriesData.find((c) => c.cca3 === currentRoute));
+
+      const selectedCountryResponse = countriesData.find(
+        (c) => c.cca3 === currentRoute
+      );
+
+      if (selectedCountryResponse) {
+        setCountryCode(selectedCountryResponse.cca2);
+        setSelectedCountry(selectedCountryResponse);
+      }
     }
   };
 
